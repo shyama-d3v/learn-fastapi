@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException # type: ignore
-from pydantic import BaseModel
+from pydantic import BaseModel 
 from typing import List
 
 app = FastAPI()
@@ -8,7 +8,7 @@ app = FastAPI()
 class Item(BaseModel):
     id: int
     name: str
-    description: str = None
+    description: str | None = None
     price: float
     on_offer: bool
 
@@ -17,7 +17,7 @@ items: List[Item] = []
 
 @app.get("/")
 def read_root():
-    return {"message":"Welcome to FastAPI..."}
+    return {"message":"Welcome to FastAPI"}
 # Create an item
 @app.post("/items/", response_model=Item)
 def create_item(item: Item):
