@@ -1,8 +1,8 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,HTTPException,status
 from models.todo import Todo
 from config.database import collection_name
 from schema.schemas import list_serial
-from bson import ObjectId
+from bson.objectid import ObjectId
 
 router=APIRouter()
 
@@ -11,7 +11,7 @@ router=APIRouter()
 async def get_todos():
     try:
         todos = list_serial(collection_name.find())
-        return {"status": "success", "data": todos}
+        return {"status": status.HTTP_200_OK, "data": todos}
     except Exception as e:
          raise HTTPException(status_code=500, detail=str(e))
 
