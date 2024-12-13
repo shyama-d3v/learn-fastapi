@@ -1,10 +1,13 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 try:
+    DB_URL = os.getenv("DB_URL")
     # Connect to MongoDB
     client = MongoClient(
-        "mongodb+srv://shyama:shyama@cluster0.niex4.mongodb.net/",
+        DB_URL,
         server_api=ServerApi('1')
     )
     db = client.user_db
