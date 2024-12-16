@@ -17,6 +17,10 @@ app.add_middleware(CORSMiddleware,
     allow_headers=["*"])
 
 
+@app.get('/')
+def entry_point():
+    return "Welcome to the user management system"
+
 # Register User
 @app.post("/auth/register", response_model=schemas.UserOut)
 def register_user(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
